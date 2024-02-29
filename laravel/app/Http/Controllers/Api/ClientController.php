@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Services\ClientService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ClientController extends Controller
@@ -80,5 +79,18 @@ class ClientController extends Controller
         $this->service->delete($id);
         
         return response()->json([], Response::HTTP_NO_CONTENT);
+    }
+    
+    public function orders(string $id)
+    {
+        $orders = $this->service->getOrders($id);
+
+        if(!$orders) {
+            return response()->json([
+                "error" => "Not Found"
+            ], Response::HTTP_NOT_FOUND);
+        }
+        
+        return $orders;
     }
 }

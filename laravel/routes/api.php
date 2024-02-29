@@ -8,4 +8,5 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource("/products", ProductController::class);
 Route::apiResource("/clients", ClientController::class);
 Route::apiResource("/orders", OrderController::class);
+Route::get("/clients/{id}/orders", [ClientController::class, "orders"]);
 Route::get("/orders/{id}/client", [OrderController::class, "client"]);

@@ -9,7 +9,6 @@ use App\Http\Requests\StoreUpdateOrderRequest;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\OrderResource;
 use App\Services\OrderService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class OrderController extends Controller
@@ -18,16 +17,6 @@ class OrderController extends Controller
     {}
 
     
-    public function client(string $id)
-    {
-        if(!$client = $this->service->getClient($id)) {
-            return response()->json([
-                "error" => "Not Found"
-            ], Response::HTTP_NOT_FOUND);
-        }
-        
-        return new ClientResource($client);
-    }
     /**
      * Display a listing of the resource.
      */
@@ -92,5 +81,16 @@ class OrderController extends Controller
         $this->service->delete($id);
         
         return response()->json([], Response::HTTP_NO_CONTENT);
+    }
+
+    public function client(string $id)
+    {
+        if(!$client = $this->service->getClient($id)) {
+            return response()->json([
+                "error" => "Not Found"
+            ], Response::HTTP_NOT_FOUND);
+        }
+        
+        return new ClientResource($client);
     }
 }
