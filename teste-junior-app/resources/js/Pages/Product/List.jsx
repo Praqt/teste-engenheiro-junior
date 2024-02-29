@@ -20,22 +20,34 @@ export default function List({ auth }) {
         );
     };
 
+    const CurrencyCell = ({ rowData, dataKey, ...props }) => {
+        const formattedPrice = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(rowData[dataKey]);
+
+        return <Cell {...props}>{formattedPrice}</Cell>;
+    };
+
     const handleDelete = async (orderId) => {
         try {
-            const response = await axios.delete(`/api/delete/products/${orderId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await axios.delete(
+                `/api/delete/products/${orderId}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
 
             if (response.status === 200) {
-                console.log('Product deleted successfully');
+                console.log("Product deleted successfully");
                 window.location.reload();
             } else {
-                console.error('Failed to delete product');
+                console.error("Failed to delete product");
             }
         } catch (error) {
-            console.error('Error deleting product:', error);
+            console.error("Error deleting product:", error);
         }
     };
 
@@ -50,7 +62,6 @@ export default function List({ auth }) {
                 setError(error);
             });
     }, []);
-
 
     return (
         <AuthenticatedLayout
@@ -84,7 +95,7 @@ export default function List({ auth }) {
 
                         <Column width={150}>
                             <HeaderCell>Preço</HeaderCell>
-                            <Cell dataKey="price" />
+                            <CurrencyCell dataKey="price" />
                         </Column>
                         <Column width={40} fixed="right">
                             <HeaderCell></HeaderCell>
@@ -104,7 +115,9 @@ export default function List({ auth }) {
                                 {(rowData) => (
                                     <IconButton
                                         icon={faTrash}
-                                        onClick={() => handleDelete(rowData.uuid)}
+                                        onClick={() =>
+                                            handleDelete(rowData.uuid)
+                                        }
                                     />
                                 )}
                             </Cell>

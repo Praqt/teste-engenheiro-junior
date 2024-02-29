@@ -19,6 +19,7 @@ class ProductFactory extends Factory
             'uuid' => Str::uuid(),
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
+            'price' => $this->faker->randomFloat(2, 0, 1000),
         ];
     }
 }
