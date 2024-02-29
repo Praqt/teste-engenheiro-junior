@@ -29,6 +29,7 @@ export default function List({ auth }) {
         return <Cell {...props}>{formattedPrice}</Cell>;
     };
 
+
     const handleDelete = async (orderId) => {
         try {
             const response = await axios.delete(
@@ -103,7 +104,7 @@ export default function List({ auth }) {
                                 {(rowData) => (
                                     <IconButton
                                         icon={faEdit}
-                                        onClick={() => handleEdit(rowData.uuid)}
+                                        href={route("product.edit", rowData.uuid)}
                                     />
                                 )}
                             </Cell>

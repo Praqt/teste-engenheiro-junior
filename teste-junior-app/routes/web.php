@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,23 +31,25 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/products', function () {
-    return Inertia::render('Product/List');
-})->middleware(['auth', 'verified'])->name('products');
-
-Route::get('/orders', function () {
-    return Inertia::render('Order/List');
-})->middleware(['auth', 'verified'])->name('orders');
-
-Route::get('/clients', function () {
-    return Inertia::render('Client/List');
-})->middleware(['auth', 'verified'])->name('clients');
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/products', function () {
+        return Inertia::render('Product/List');
+    })->name('products');
+    Route::get('/orders', function () {
+        return Inertia::render('Order/List');
+    })->name('orders');
+    Route::get('/clients', function () {
+        return Inertia::render('Client/List');
+    })->name('clients');
+    Route::get('/products/edit/{uuid}', function () {
+        return Inertia::render('Product/Edit');
+    })->name('product.edit');
+
 });
 
 require __DIR__.'/auth.php';
