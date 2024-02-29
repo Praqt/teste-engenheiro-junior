@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. denv
+
+PARAMS=$@
+
+if [[ $PARAMS == tinker* ]]; then
+    docker exec -ti $CONTAINER_PHP php artisan $PARAMS
+elif [[ $PARAMS == make:* ]] || [[ $PARAMS == vendor:publish* ]]; then
+    docker run --rm --user $(id -u):$(id -g) -v $(pwd):/app -w /app -ti  php:$PHP_VERSAO-cli php artisan $PARAMS
+else
+    docker exec $CONTAINER_PHP php artisan $PARAMS
+fi

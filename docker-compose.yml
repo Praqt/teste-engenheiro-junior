@@ -1,0 +1,54 @@
+version: "3.7"
+
+networks:
+  praqt-teste-network:
+    driver: bridge
+
+services:
+  app:
+    build:
+      args:
+        user: roger
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: praqt-teste-php
+    container_name: praqt-teste-php
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./docker/php/php.ini-development:/usr/local/etc/php/php.ini
+    networks:
+      - praqt-teste-network
+
+  db:
+    image: postgres:12
+    container_name: praqt-teste-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DATABASE: ${DB_DATABASE}
+      POSTGRES_ROOT_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: postgres
+    ports:
+      - 25432:5432
+    volumes:
+      - ./storage/database:/var/lib/postgresql/data
+      - ./docker/postgres:/docker-entrypoint-initdb.d
+    networks:
+      - praqt-teste-network
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: praqt-teste-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - praqt-teste-network

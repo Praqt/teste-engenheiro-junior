@@ -1,0 +1,12 @@
+#!/bin/bash
+
+. denv
+
+VAR=$@
+
+if [ -z "$VAR" ]
+then
+	docker exec -ti $CONTAINER_PHP bash
+else
+	docker exec $CONTAINER_PHP $VAR
+fi
