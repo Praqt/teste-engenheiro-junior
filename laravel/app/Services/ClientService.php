@@ -52,4 +52,13 @@ class ClientService
     {
         $this->model->findOrFail($id)->delete();
     }
+    
+    public function getOrders(string $id): array | null
+    {
+        if(!$client = $this->model->find($id)) {
+            return null;
+        }
+        
+        return $client->orders()->get()->toArray();
+    }
 }
