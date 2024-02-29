@@ -10,6 +10,14 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'uuid'; // Set the primary key property to 'uuid'
+    public $incrementing = false;
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
     protected $fillable = [
         'uuid',
         'name',

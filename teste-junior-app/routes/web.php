@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,19 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/products', function () {
+    return Inertia::render('Product/List');
+})->middleware(['auth', 'verified'])->name('products');
+
+Route::get('/orders', function () {
+    return Inertia::render('Order/List');
+})->middleware(['auth', 'verified'])->name('orders');
+
+Route::get('/clients', function () {
+    return Inertia::render('Client/List');
+})->middleware(['auth', 'verified'])->name('clients');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

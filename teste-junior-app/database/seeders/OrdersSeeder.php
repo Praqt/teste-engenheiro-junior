@@ -22,30 +22,34 @@ class OrdersSeeder extends Seeder
 
         $numberOfOrders = 10;
 
+        $clients = Client::all();
         $products = Product::all();
 
         for ($i = 0; $i < $numberOfOrders; $i++) {
             $uuid = Str::uuid();
 
-            $clientUuid = Client::inRandomOrder()->value('uuid');
+            // Get a random client
+            $client = $clients->random();
 
             $status = $faker->randomElement(['Em Aberto', 'Pago', 'Cancelado']);
 
             $randomProducts = $products->random(mt_rand(1, 5));
 
-            $productsJson = $randomProducts->map(function ($product) use ($faker) {
+            $productsArray = $randomProducts->map(function ($product) use ($faker) {
                 return [
                     'uuid' => $product->uuid,
                     'name' => $product->name,
                     'quantity' => $faker->numberBetween(1, 10),
                 ];
-            })->toJson();
+            })->toArray();
+
+            $productsJson = json_encode($productsArray);
 
             Order::create([
                 'uuid' => $uuid,
-                'client_uuid' => $clientUuid,
+                'client_uuid' => $client->uuid,
                 'status' => $status,
-                'products' => $productsJson,
+                'products' => $productsJson, // Insert the JSON-encoded string
             ]);
         }
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
+use App\Models\Product;
 
-class ClientController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        $clients = Client::all();
-        $clients = $clients->sortByDesc('name');
-        return response()->json($clients);
+        $products = Product::all();
+        $products = $products->sortByDesc('name');
+        return response()->json($products);
 
     }
 
@@ -30,18 +30,21 @@ class ClientController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:clients,email',
+            'description' => 'required',
+            'price'=>'required'
         ]);
 
-        // Create new client
-        $client = new Client();
-        $client->name = $request->input('name');
-        $client->email = $request->input('email');
+
+        // Create new product
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
         // Set other fields
 
-        $client->save();
+        $product->save();
 
-        return response()->json($client, 201);
+        return response()->json($product, 201);
  }
 
     /**
@@ -52,8 +55,8 @@ class ClientController extends Controller
      */
     public function show($uuid)
     {
-        $client = Client::findOrFail($uuid);
-        return response()->json($client);
+        $product = Product::findOrFail($uuid);
+        return response()->json($product);
     }
 
     /**
@@ -63,8 +66,8 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */ public function edit($uuid)
     {
-        $client = Client::findOrFail($uuid);
-        return response()->json($client);
+        $product = Product::findOrFail($uuid);
+        return response()->json($product);
     }
 
     /**
@@ -78,13 +81,14 @@ class ClientController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:clients,email,'.$uuid,
+            'description' => 'required',
+            'price'=>'required'
         ]);
 
-        $client = Client::find($uuid);
-        $client->update($request->all());
+        $product = Product::find($uuid);
+        $product->update($request->all());
 
-        return response()->json($client);
+        return response()->json($product);
     }
 
     /**
@@ -95,9 +99,9 @@ class ClientController extends Controller
      */
     public function destroy($uuid)
     {
-        $client = Client::where('uuid', $uuid)->firstOrFail();
-        $client->delete();
+        $product = Product::where('uuid', $uuid)->firstOrFail();
+        $product->delete();
 
-        return response()->json(['message' => 'Client deleted successfully']);
+        return response()->json(['message' => 'Product deleted successfully']);
     }
 }

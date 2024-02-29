@@ -10,10 +10,18 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
     protected $fillable = [
         'uuid',
         'name',
-        'descricao',
+        'description',
+        'price',
     ];
 
     protected static function boot()
