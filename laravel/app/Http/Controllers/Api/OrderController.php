@@ -31,9 +31,9 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $order = $this->service->getAll($request->filter);
+        $order = $this->service->getAll();
         
         return $order;
     }

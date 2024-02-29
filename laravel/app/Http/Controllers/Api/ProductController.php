@@ -19,9 +19,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $products = $this->service->getAll($request->filter);
+        $products = $this->service->getAll();
         
         return $products;
     }
