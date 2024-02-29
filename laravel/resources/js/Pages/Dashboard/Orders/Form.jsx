@@ -1,6 +1,7 @@
 import ComboBox from "@/Components/ComboBox";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { StatusEnum } from "@/lib/enums/StatusEnum";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Head, useForm } from "@inertiajs/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -139,7 +140,7 @@ export default function Form({ auth, order }) {
                                     />
                                 </label>
 
-                                <label className="flex flex-col z-40">
+                                <div className="flex flex-col z-40">
                                     <span className="text-gray-200">
                                         Produtos
                                     </span>
@@ -148,12 +149,7 @@ export default function Form({ auth, order }) {
                                         handler={handleProductSelection}
                                         label="Selecione os Produtos..."
                                     />
-                                </label>
-                                {selectedProducts.size > 0 && (
-                                    <div className="p-3 w-72">
-                                        <div className="font-bold rounded-t-lg p-5 bg-red-500 w-full">
-                                            Produtos Selecionados
-                                        </div>
+                                    {selectedProducts.size > 0 && (
                                         <ul className="flex flex-col gap-y-1 py-4 px-3 bg-gray-100 rounded-b-lg">
                                             {Array.from(selectedProducts).map(
                                                 (product) => (
@@ -161,20 +157,13 @@ export default function Form({ auth, order }) {
                                                         key={product.id}
                                                         className="flex justify-between"
                                                     >
-                                                        <div>
-                                                            <span>
-                                                                {product.name}
-                                                            </span>
-                                                            <span>
-                                                                {" - R$" +
-                                                                    (
-                                                                        product.price /
-                                                                        100
-                                                                    ).toFixed(
-                                                                        2,
-                                                                    )}
-                                                            </span>
-                                                        </div>
+                                                        <span>
+                                                            {product.name} - R$
+                                                            {(
+                                                                product.price /
+                                                                100
+                                                            ).toFixed(2)}
+                                                        </span>
                                                         <button
                                                             onClick={(e) =>
                                                                 handleProductDelete(
@@ -182,22 +171,21 @@ export default function Form({ auth, order }) {
                                                                     product,
                                                                 )
                                                             }
-                                                            className="text-red-200 bg-red-500 px-2 rounded-full"
                                                         >
-                                                            x
+                                                            <XMarkIcon className="text-red-600 w-5 h-5" />
                                                         </button>
                                                     </li>
                                                 ),
                                             )}
                                         </ul>
-                                    </div>
-                                )}
+                                    )}
+                                </div>
 
                                 <label className="flex flex-col w-60">
                                     <span className="text-gray-200 py-2">
                                         Status
                                     </span>
-                                    <ul className="flex flex-col w-full items-start p-3 text-gray-800 bg-gray-200 rounded-xl gap-y-5">
+                                    <ul className="flex flex-col w-full items-start p-3 text-gray-200 border-l-2 border-blue-700 gap-y-5">
                                         {StatusEnum.map((option, i) => (
                                             <li
                                                 key={i}
@@ -210,7 +198,7 @@ export default function Form({ auth, order }) {
                                                     type="radio"
                                                     value={option.value}
                                                     name="status"
-                                                    checked={
+                                                    defaultChecked={
                                                         order &&
                                                         order.status ===
                                                         option.value
