@@ -8,15 +8,12 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-
     public function up(): void
     {
-        Schema::create('pedidos', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->uuid('uuid')->unique();
-            $table->uuid('cliente_uuid');
-            $table->foreign('cliente_uuid')->references('uuid')->on('clientes');
-            $table->string('status');
-            $table->json('produtos');
+            $table->string('email')->unique();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('pedidos');
+        Schema::dropIfExists('clients');
     }
 };

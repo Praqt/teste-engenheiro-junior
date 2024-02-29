@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 
-class Pedido extends Model
+class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'uuid',
-        'cliente_uuid',
+        'client_uuid',
         'status',
     ];
 
@@ -21,18 +21,18 @@ class Pedido extends Model
     {
         parent::boot();
 
-        static::creating(function ($pedido) {
-            $pedido->uuid = Str::uuid();
+        static::creating(function ($order) {
+            $order->uuid = Str::uuid();
         });
     }
 
-    public function produtos()
+    public function products()
     {
-        return $this->belongsToMany(Produto::class);
+        return $this->belongsToMany(Product::class);
     }
 
-    public function cliente()
+    public function client()
     {
-        return $this->belongsTo(Cliente::class, 'cliente_uuid', 'uuid');
+        return $this->belongsTo(Client::class, 'client_uuid', 'uuid');
     }
 }

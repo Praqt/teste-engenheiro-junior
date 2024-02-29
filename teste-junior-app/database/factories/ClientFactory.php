@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cliente>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Client>
  */
-class ClienteFactory extends Factory
+class ClientFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,8 @@ class ClienteFactory extends Factory
     {
         return [
             'uuid' => Str::uuid(),
-            'nome' => $this->faker->name,
+            'name' => $this->faker->name,
+            'email' => fake()->unique()->safeEmail(),
         ];
     }
 }

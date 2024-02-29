@@ -6,26 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Cliente extends Model
+class Client extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'uuid',
-        'nome',
+        'name',
+        'email'
     ];
 
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($cliente) {
-            $cliente->uuid = Str::uuid();
+        static::creating(function ($client) {
+            $client->uuid = Str::uuid();
         });
     }
 
-    public function pedidos()
+    public function orders()
     {
-        return $this->hasMany(Pedido::class);
+        return $this->hasMany(Order::class);
     }
 }

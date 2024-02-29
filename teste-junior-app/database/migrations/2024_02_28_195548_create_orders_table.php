@@ -8,11 +8,15 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->uuid('uuid')->unique();
-            $table->string('nome');
+            $table->uuid('client_uuid');
+            $table->foreign('client_uuid')->references('uuid')->on('clients');
+            $table->string('status');
+            $table->json('products');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('orders');
     }
 };

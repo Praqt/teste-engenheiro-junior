@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Produto extends Model
+class Product extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'uuid',
-        'nome',
+        'name',
         'descricao',
     ];
 
@@ -20,14 +20,14 @@ class Produto extends Model
     {
         parent::boot();
 
-        static::creating(function ($produto) {
-            $produto->uuid = Str::uuid();
+        static::creating(function ($product) {
+            $product->uuid = Str::uuid();
         });
     }
 
-    public function pedido()
+    public function order()
     {
-        return $this->belongsTo(Pedido::class);
+        return $this->belongsTo(Order::class);
     }
 
 }
