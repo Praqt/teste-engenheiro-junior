@@ -28,7 +28,6 @@ class OrdersSeeder extends Seeder
         for ($i = 0; $i < $numberOfOrders; $i++) {
             $uuid = Str::uuid();
 
-            // Get a random client
             $client = $clients->random();
 
             $status = $faker->randomElement(['Em Aberto', 'Pago', 'Cancelado']);
@@ -49,7 +48,7 @@ class OrdersSeeder extends Seeder
                 'uuid' => $uuid,
                 'client_uuid' => $client->uuid,
                 'status' => $status,
-                'products' => $productsJson, // Insert the JSON-encoded string
+                'products' => $productsJson,
             ]);
         }
     }
