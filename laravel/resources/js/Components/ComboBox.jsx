@@ -22,13 +22,17 @@ export default function ComboBox({ handler, items, label }) {
                             <Listbox.Option
                                 key={i}
                                 className={({ active }) =>
-                                    `relative cursor-default select-none py-2 px-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+                                    `relative cursor-default select-none py-2 px-4 ${active
+                                        ? "bg-amber-100 text-amber-900"
+                                        : "text-gray-900"
                                     }`
                                 }
                                 value={product}
                             >
                                 {({ selected }) => (
-                                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                    <span
+                                        className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
+                                    >
                                         {product.name}
                                     </span>
                                 )}
@@ -38,5 +42,5 @@ export default function ComboBox({ handler, items, label }) {
                 </Transition>
             </div>
         </Listbox>
-    )
+    );
 }

@@ -12,16 +12,10 @@ class ProductService
     public function __construct(protected Product $model) {}
         
 
-    public function getAll(string $filter = null): array
+    public function getAll(): array
     {
         return $this->model
-                    ->where(function($query) use ($filter) {
-                        if($filter) {
-                            $query->where("name", "like", "%{$filter}%");
-                            $query->where("price", "like", "%{$filter}%");
-                            $query->where("stock", "like", "%{$filter}%");
-                        }
-                    })
+                    ->filter()
                     ->get()
                     ->toArray();
     }

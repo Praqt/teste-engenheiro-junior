@@ -1,18 +1,18 @@
 export const StatusEnum = [
     {
-        "label": "Em Aberto",
-        "value": "open"
+        label: "Em Aberto",
+        value: "open",
     },
     {
-        "label": "Pago",
-        "value": "paid"
+        label: "Pago",
+        value: "paid",
     },
     {
-        "label": "Cancelado",
-        "value": "cancelled"
-    }
-]
+        label: "Cancelado",
+        value: "cancelled",
+    },
+];
 
 export function normalizeStatus(statusValue) {
-    return StatusEnum.find(status => status.value == statusValue).label
+    return StatusEnum.find((status) => status.value == statusValue).label;
 }
