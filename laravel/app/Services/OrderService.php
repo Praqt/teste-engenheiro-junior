@@ -13,14 +13,10 @@ class OrderService
     public function __construct(protected Order $model) {}
 
 
-    public function getAll(string $filter = null): array
+    public function getAll(): array
     {
         return $this->model
-                    ->where(function($query) use ($filter) {
-                        if($filter) {
-                            $query->where("total_price", "like", "%{$filter}%");
-                        }
-                    })
+                    ->filter()
                     ->get()
                     ->toArray();
     }

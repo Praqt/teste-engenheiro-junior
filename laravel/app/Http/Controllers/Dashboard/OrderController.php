@@ -18,9 +18,9 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $orders = $this->service->getAll($request->filter);
+        $orders = $this->service->getAll();
         
         return Inertia::render("Dashboard/Orders/Index", [
             "orders" => $orders,

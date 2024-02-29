@@ -19,9 +19,9 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $clients = $this->service->getAll($request->filter);
+        $clients = $this->service->getAll();
 
         return Inertia::render("Dashboard/Clients/Index", [
             "clients" => $clients

@@ -12,16 +12,10 @@ class ClientService
     public function __construct(protected Client $model) {}
 
 
-    public function getAll(string $filter = null): array
+    public function getAll(): array
     {
         return $this->model
-                    ->where(function($query) use ($filter) {
-                        if($filter) {
-                            $query->where("name", "like", "%{$filter}%");
-                            $query->where("email", "like", "%{$filter}%");
-                            $query->where("phone_number", "like", "%{$filter}%");
-                        }
-                    })
+                    ->filter()
                     ->get()
                     ->toArray();
     }
