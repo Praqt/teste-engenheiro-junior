@@ -1,0 +1,5 @@
+#!/bin/bash
+
+. denv
+
+docker exec -ti $CONTAINER_PHP composer $@

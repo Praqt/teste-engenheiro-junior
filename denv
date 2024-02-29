@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CONTAINER_POSTGRES=praqt-teste-postgres
+CONTAINER_NGINX=praqt-teste-nginx
+CONTAINER_PHP=praqt-teste-php
+PHP_VERSAO=8.0
