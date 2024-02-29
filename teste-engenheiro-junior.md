@@ -1,52 +1,48 @@
 # Teste para vaga de Engenheiro full stack Junior
 
-Nesse teste analisaremos seu conhecimento geral, velocidade de desenvolvimento e capacidade de melhoria.
+## Pré-requisitos
 
-## Instruções
+Antes de começar, certifique-se de ter os seguintes requisitos instalados em sua máquina:
 
-Utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, você vai criar uma aplicação de cadastro de pedidos de compra com as seguintes funcionalidades:
+- Docker: [Instalação do Docker](https://docs.docker.com/get-docker/)
+- Docker Compose: [Instalação do Docker Compose](https://docs.docker.com/compose/install/)
+- Sail: [Instalação do Sail](https://laravel.com/docs/10.x/sail)
+- Breeze (React) [Instalação do Breeze](https://laravel.com/docs/10.x/starter-kits#breeze-and-inertia)
 
-- CRUD de clientes.
-- CRUD de produtos.
-- CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
-- Cada CRUD:
-  - conter lista dos itens cadastrado, com filtros e ordenação para tods os campos apresentados.
-  - deve possuir formulários para criação e atualização de seus itens.
-  - deve permitir a deleção de qualquer item de sua lista.
-    
-- API Rest JSON para todos os CRUDS listados.
+## Instalação
 
-## Banco
+Siga estas etapas para configurar e executar o projeto:
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
-- Implementação das validações necessárias.
+1. Clone este repositório em sua máquina local:
 
-## Tecnologias:
+```bash
+git clone https://github.com/EstherWI/teste-engenheiro-junior/tree/EstherDeSantanaAraujo
+```
+2. Acesse o diretório do projeto:
+```bash
+cd teste-junior-app
+```
+3. Inicie o Sail:
+```bash
+./vendor/bin/sail up
 
-- HTML
-- CSS
-- Javascript(Poderá ser utilizado frameworks)
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
+```
+4. Migrações do Banco de dados:
+```bash
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
+```
 
-## Entrega
+4. Rodar aplicação:
+```bash
+npm run dev
+```
 
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo teste-engenheiro-junior.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
+### Dashboard
+- Rota: /dashboard
 
-## Bônus
+### Cadastro
+- Rota: /register
 
-- Implementar autenticação de usuário na aplicação.
-- Implementar aplicação de desconto em alguns pedidos de compra.
-
-
-## O que iremos analisar
-
-- Organização do código;
-- Aplicação de design patterns;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
-- Inovação e melhorias.
+### Login
+- Rota: /login
