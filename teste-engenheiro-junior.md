@@ -13,3 +13,17 @@ Clone este repositório com:
 ```bash
 $ git clone --branch "LucasThiagoDávalosOrtiz" https://github.com/Luks17/teste-engenheiro-junior.git
 ```
+
+Navegue até a raíz do projeto com:
+
+```bash
+$ cd teste-engenheiro-junior/laravel
+```
+
+Rode docker-compose pela primeira vez e use docker exec para instalar as dependencias:
+
+```bash
+$ docker-compose up -d
+$ docker exec -it laravel-luksApp-1 composer install
+$ docker-compose down
+```
