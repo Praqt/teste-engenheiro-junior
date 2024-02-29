@@ -120,14 +120,20 @@ export default function Form({ auth, order }) {
                                     <ComboBox items={products} handler={handleProductSelection} label="Selecione os Produtos..." />
                                 </label>
                                 {selectedProducts.size > 0 && (
-                                    <ul className="bg-gray-300 p-3 flex flex-col gap-y-1 rounded-lg w-60">
-                                        {Array.from(selectedProducts).map((product) => (
-                                            <li key={product.id} className="flex justify-between">
-                                                <span>{product.name}</span>
-                                                <button onClick={(e) => handleProductDelete(e, product)} className="text-red-200 bg-red-500 px-2 rounded-full">x</button>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div className="p-3 w-72">
+                                        <div className="font-bold rounded-t-lg p-5 bg-red-500 w-full">Produtos Selecionados</div>
+                                        <ul className="flex flex-col gap-y-1 py-4 px-3 bg-gray-100 rounded-b-lg">
+                                            {Array.from(selectedProducts).map((product) => (
+                                                <li key={product.id} className="flex justify-between">
+                                                    <div>
+                                                        <span>{product.name}</span>
+                                                        <span>{" - R$" + (product.price / 100).toFixed(2)}</span>
+                                                    </div>
+                                                    <button onClick={(e) => handleProductDelete(e, product)} className="text-red-200 bg-red-500 px-2 rounded-full">x</button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 )}
 
                                 <label className="flex flex-col w-60">
