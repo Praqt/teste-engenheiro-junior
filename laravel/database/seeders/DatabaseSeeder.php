@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Client;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::factory(10)->create();
         Product::factory(10)->create();
+        Order::factory(10)->create();
     }
 }
